@@ -1,0 +1,217 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Pesquisa de Satisfação</h2>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Gênero:</label>
+                <select class="form-select" name="genero">
+                    {% for choice in form.genero.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Idade:</label>
+                <select class="form-select" name="idade">
+                    {% for choice in form.idade.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Frequência de compra:</label>
+                <select class="form-select" name="frequencia_compra">
+                    {% for choice in form.frequencia_compra.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Gasto médio de compra:</label>
+                <select class="form-select" name="gasto_medio">
+                    {% for choice in form.gasto_medio.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Outras lojas que você faz compras:</label>
+                <select class="form-select" name="outras_lojas">
+                    {% for choice in form.outras_lojas.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Principais motivos para comprar:</label>
+                <select class="form-select" name="principais_motivos">
+                    {% for choice in form.principais_motivos.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Meios de acompanhamento de ofertas e novidades:</label>
+                <select class="form-select" name="meios_deacompanhamento">
+                    {% for choice in form.meios_deacompanhamento.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Canal de TV que você viu nossas ofertas:</label>
+                <select class="form-select" name="canal_tv">
+                    {% for choice in form.canal_tv.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Canal de rádio que você viu nossas ofertas:</label>
+                <select class="form-select" name="canal_radio">
+                    {% for choice in form.canal_radio.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Você usa o APP Clube Redeconomia?</label>
+                <select class="form-select" name="uso_app">
+                    {% for choice in form.uso_app.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fatores que influenciam na escolha do local de compra:</label>
+                <select class="form-select" name="fatores_escolha">
+                    {% for choice in form.fatores_escolha.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Principais motivos para comprar na Redeconomia:</label>
+                <select class="form-select" name="motivos_redeconomia">
+                    {% for choice in form.motivos_redeconomia.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Principais pontos positivos da loja:</label>
+                <select class="form-select" name="pontos_positivos">
+                    {% for choice in form.pontos_positivos.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Principais pontos negativos da loja:</label>
+                <select class="form-select" name="pontos_negativos">
+                    {% for choice in form.pontos_negativos.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Avaliação da variedade de produtos:</label>
+                <select class="form-select" name="avaliacao_variedade">
+                    {% for choice in form.avaliacao_variedade.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Avaliação da limpeza e higiene:</label>
+                <select class="form-select" name="avaliacao_limpeza">
+                    {% for choice in form.avaliacao_limpeza.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Avaliação dos preços:</label>
+                <select class="form-select" name="avaliacao_preços">
+                    {% for choice in form.avaliacao_preços.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Você encontra todos os produtos anunciados?</label>
+                <select class="form-select" name="produtos_anunciados">
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Avaliação do atendimento:</label>
+                <select class="form-select" name="avaliacao_atendimento">
+                    {% for choice in form.avaliacao_atendimento.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Sugestões de melhorias:</label>
+                <select class="form-select" name="sugestoes_melhorias">
+                    {% for choice in form.sugestoes_melhorias.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Entrevistadora:</label>
+                <select class="form-select" name="colaboradora">
+                    {% for choice in form.colaboradora.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Loja da Redeconomia que você frequenta:</label>
+                <select class="form-select" name="loja_redeconomia">
+                    {% for choice in form.loja_redeconomia.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
