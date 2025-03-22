@@ -10,6 +10,14 @@
 <body>
     <div class="container mt-4">
         <h2 class="text-center">Pesquisa de Satisfação</h2>
+        <p class="text-center">Total de registros: {{ total_registros }}</p>
+
+        <h3>Registros por entrevistadora:</h3>
+        <ul>
+            {% for registro in registros_por_entrevistadora %}
+                <li>{{ registro.colaboradora }}: {{ registro.total }}</li>
+            {% endfor %}
+        </ul>
         <form method="post" class="mt-4">
             {% csrf_token %}
 

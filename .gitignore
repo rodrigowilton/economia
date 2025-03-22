@@ -1,0 +1,30 @@
+# Arquivos de banco de dados
+*.sqlite3
+
+# Arquivos de mídia
+/media
+
+# Arquivos estáticos coletados
+/static
+
+# Arquivos de configuração
+local_settings.py
+.env
+
+# Arquivos de ambiente virtual
+venv/
+__pycache__/
+
+# Arquivos de log
+*.log
+
+# Arquivos de teste
+*.pyc
+*.swp
+*.swo
+*.DS_Store
+
+# Arquivos de pacotes
+dist/
+build/
+*.egg-info/
