@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Totalização da Pesquisa</h1>
+    <div class="relatorio-container">
+        <!-- Exibindo o total de registros -->
+        <div class="total-registros">
+            <h2>Total de Registros:</h2>
+            <p><strong>{{ total_registros }}</strong></p>
+        </div>
+
+        <!-- Exibindo os registros por entrevistadora -->
+        <div class="registros-entrevistadora">
+            <h2>Registros por Entrevistadora</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entrevistadora</th>
+                        <th>Total de Registros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in registros_por_entrevistadora %}
+                        <tr>
+                            <td>{{ registro.colaboradora }}</td>
+                            <td>{{ registro.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <!-- Exibindo os totais por pergunta e loja -->
+        <div class="totais-pergunta-loja">
+            <h2>Totais por Pergunta e Loja</h2>
+            {% for pergunta, dados in total_por_pergunta_por_loja.items %}
+                <div class="pergunta-secao">
+                    <h3>{{ pergunta|capfirst }}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Loja</th>
+                                <th>Resposta</th>
+                                <th>Total de Registros</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in dados %}
+                                <tr>
+                                    <td>{{ item.loja_redeconomia }}</td>
+                                    <td>{{ item.pergunta }}</td>
+                                    <td>{{ item.total }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+<style>
+    .relatorio-container {
+        margin: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+        color: #2c3e50;
+    }
+
+    h2, h3 {
+        font-size: 1.5em;
+        color: #34495e;
+    }
+
+    .total-registros {
+        margin-bottom: 20px;
+        background-color: #ecf0f1;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .registros-entrevistadora,
+    .totais-pergunta-loja {
+        margin-bottom: 30px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    table, th, td {
+        border: 1px solid #bdc3c7;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f6f7;
+        color: #2c3e50;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .pergunta-secao {
+        margin-bottom: 20px;
+    }
+
+    hr {
+        border: 1px solid #bdc3c7;
+        margin-top: 30px;
+    }
+</style>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totalização da Pesquisa</title>
+</head>
+<body>
+    <h1>Totalização da Pesquisa</h1>
+
+    <p><strong>Total de Registros:</strong> {{ total_registros }}</p>
+
+    <h2>Registros por Entrevistadora</h2>
+    <table border="1">
+        <tr>
+            <th>Entrevistadora</th>
+            <th>Total de Pesquisas</th>
+        </tr>
+        {% for item in registros_por_entrevistadora %}
+        <tr>
+            <td>{{ item.colaboradora }}</td>
+            <td>{{ item.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Detalhamento por Loja e Pergunta</h2>
+    {% for pergunta, resultados in total_por_pergunta_por_loja.items %}
+        <h3>{{ pergunta|title }}</h3>
+        <table border="1">
+            <tr>
+                <th>Loja</th>
+                <th>Resposta</th>
+                <th>Total</th>
+            </tr>
+            {% for item in resultados %}
+            <tr>
+                <td>{{ item.loja_redeconomia }}</td>
+                <td>{{ item.pergunta }}</td>
+                <td>{{ item.total }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+</body>
+</html>
