@@ -3,13 +3,11 @@
 {% block content %}
     <h1>Totalização da Pesquisa</h1>
     <div class="relatorio-container">
-        <!-- Exibindo o total de registros -->
         <div class="total-registros">
             <h2>Total de Registros:</h2>
             <p><strong>{{ total_registros }}</strong></p>
         </div>
 
-        <!-- Exibindo os registros por entrevistadora -->
         <div class="registros-entrevistadora">
             <h2>Registros por Entrevistadora</h2>
             <table>
@@ -32,7 +30,6 @@
 
         <hr>
 
-        <!-- Exibindo os totais por pergunta e loja -->
         <div class="totais-pergunta-loja">
             <h2>Totais por Pergunta e Loja</h2>
             {% for pergunta, dados in total_por_pergunta_por_loja.items %}

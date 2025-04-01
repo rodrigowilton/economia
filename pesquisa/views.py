@@ -105,11 +105,17 @@ def pesquisa_satisfacao(request):
     ]
 
     for pergunta in perguntas:
-        total_por_pergunta_por_loja[pergunta] = (
-            Pesquisa.objects.values('loja_redeconomia', pergunta)
-            .annotate(total=Count(pergunta))
-            .order_by('loja_redeconomia', pergunta)
-        )
+        dados_por_loja = Pesquisa.objects.values('loja_redeconomia', pergunta).annotate(total=Count(pergunta))
+        resultados = []
+        for dado in dados_por_loja:
+            valor_resposta = dado[pergunta]
+            descricao_resposta = dict(Pesquisa._meta.get_field(pergunta).choices).get(valor_resposta, valor_resposta)
+            resultados.append({
+                'loja_redeconomia': dado['loja_redeconomia'],
+                'pergunta': descricao_resposta,
+                'total': dado['total']
+            })
+        total_por_pergunta_por_loja[pergunta] = resultados
 
     return render(request, 'pesquisa/totalizacao.html', {
         'total_registros': total_registros,
