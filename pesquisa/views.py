@@ -6,6 +6,37 @@ import base64
 from .models import Pesquisa
 from django.db.models import Count
 
+
+def pesquisa_grafico_view(request):
+    perguntas = [
+        'genero', 'idade', 'frequencia_compra', 'gasto_medio', 'outras_lojas',
+        'principais_motivos', 'meios_deacompanhamento', 'canal_tv', 'canal_radio',
+        'uso_app', 'fatores_escolha', 'motivos_redeconomia', 'pontos_positivos',
+        'pontos_negativos', 'avaliacao_variedade', 'avaliacao_limpeza', 'avaliacao_preços',
+        'produtos_anunciados', 'avaliacao_atendimento', 'sugestoes_melhorias'
+    ]
+
+    pergunta_selecionada = request.POST.get('pergunta', 'genero')  # A pergunta é obtida do formulário
+
+    # Obter dados para a pergunta selecionada
+    dados_respostas = (
+        Pesquisa.objects.values('loja_redeconomia', pergunta_selecionada)
+        .annotate(total=Count(pergunta_selecionada))
+        .order_by('loja_redeconomia')
+    )
+
+    # Organizando as lojas e respostas para enviar ao gráfico
+    lojas = [item['loja_redeconomia'] for item in dados_respostas]
+    respostas = [item['total'] for item in dados_respostas]
+
+    context = {
+        'lojas': lojas,
+        'respostas': respostas,
+        'pergunta_selecionada': pergunta_selecionada
+    }
+
+    return render(request, 'pesquisa/grafico.html', context)
+
 def gerar_grafico(request):
     # Recuperando os dados para o gráfico
     registros_por_entrevistadora = (

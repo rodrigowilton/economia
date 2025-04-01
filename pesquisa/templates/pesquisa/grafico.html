@@ -1,14 +1,55 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráfico de Totalização</title>
-</head>
-<body>
-    <h1>Gráfico de Totalização de Registros por Entrevistadora</h1>
-    <img src="data:image/png;base64,{{ grafico }}" alt="Gráfico Totalizador">
-    <br>
-    <a href="{% url 'pesquisa_view' %}">Voltar para o Relatório</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Gráfico de Comparação de Respostas por Loja</h1>
+
+    <div class="container">
+        <h2>Selecione uma Pergunta para Visualização:</h2>
+        <form method="POST" action="{% url 'pesquisa_grafico' %}">
+            {% csrf_token %}
+            <label for="pergunta">Pergunta:</label>
+            <select id="pergunta" name="pergunta">
+                <option value="genero">Gênero</option>
+                <option value="idade">Idade</option>
+                <option value="frequencia_compra">Frequência de Compra</option>
+                <option value="gasto_medio">Gasto Médio</option>
+                <option value="outras_lojas">Outras Lojas</option>
+                <option value="principais_motivos">Principais Motivos</option>
+                <!-- Adicione outras perguntas conforme necessário -->
+            </select>
+            <button type="submit">Gerar Gráfico</button>
+        </form>
+    </div>
+
+    <div class="grafico-container" style="max-width: 800px; margin: 0 auto;">
+        <h2>Comparação de Respostas para "{{ pergunta_selecionada }}"</h2>
+        <canvas id="graficoBarra"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('graficoBarra').getContext('2d');
+
+        const graficoBarra = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ lojas|safe }},  // Lojas como labels no gráfico
+                datasets: [{
+                    label: "{{ pergunta_selecionada|capfirst }}",
+                    data: {{ respostas|safe }},  // Dados de respostas
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
